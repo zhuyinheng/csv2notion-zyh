@@ -78,11 +78,11 @@ class CSVData(Iterable[CSVRowType]):  # noqa:  WPS214
 
     @property
     def key_column(self) -> str:
-        return self.columns[0]
+        return self.columns[-1]
 
     @property
     def content_columns(self) -> List[str]:
-        return self.columns[1:]
+        return self.columns[1:-1]
 
     @property
     def columns(self) -> List[str]:
@@ -108,7 +108,7 @@ class CSVData(Iterable[CSVRowType]):  # noqa:  WPS214
         if not column_types:
             return {
                 key: guess_type_by_values(self.col_values(key))
-                for key in self.columns[1:]
+                for key in self.columns[0:-1]
             }
 
         if len(column_types) != len(self.columns) - 1:
